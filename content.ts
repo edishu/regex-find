@@ -17,7 +17,7 @@ function isVisible(element: HTMLElement): boolean {
 }
 
 function getElementsWithVisibleText(): HTMLElement[] {
-  let elementsWithVisibleText: HTMLElement[] = []
+  let elementsWithVisibleText: Set<HTMLElement> = new Set()
 
   function collectVisibleTextElements(node: Node): void {
     if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== "") {
@@ -25,20 +25,33 @@ function getElementsWithVisibleText(): HTMLElement[] {
       if (
         parentElement &&
         isVisible(parentElement) &&
-        !elementsWithVisibleText.includes(parentElement)
+        !elementsWithVisibleText.has(parentElement)
       ) {
-        elementsWithVisibleText.push(parentElement)
+        elementsWithVisibleText.add(parentElement)
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      node.childNodes.forEach((child) => collectVisibleTextElements(child))
+      // Traverse the child nodes
+      let childHasVisibleText = false
+      node.childNodes.forEach((child) => {
+        collectVisibleTextElements(child)
+        if (elementsWithVisibleText.has(child as HTMLElement)) {
+          childHasVisibleText = true
+        }
+      })
+
+      // If a child element contains visible text, remove the current node (parent) from the set
+      if (childHasVisibleText) {
+        elementsWithVisibleText.delete(node as HTMLElement)
+      }
     }
   }
 
   collectVisibleTextElements(document.body)
 
-  return elementsWithVisibleText
+  return Array.from(elementsWithVisibleText)
 }
 
 const elements: HTMLElement[] = getElementsWithVisibleText()
 console.log(elements)
+
 console.log(elements.map((e) => e.textContent))
