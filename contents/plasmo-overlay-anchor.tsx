@@ -6,7 +6,7 @@ import type {
 } from "plasmo"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/*"]
+  matches: ["https://quotes.toscrape.com/hi/*"]
 }
 
 // @ts-ignore: TODO improve return type of getElementsWithVisibleText
@@ -16,7 +16,7 @@ export const config: PlasmoCSConfig = {
 // }
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
-  // console.log("here")
+  console.log("here")
   return [
     {
       element: document.querySelector("h1"),
@@ -32,7 +32,7 @@ export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
 }
 
 const PlasmoPricingExtra = () => {
-  // return null
+  return null
   return (
     <span
       style={{
