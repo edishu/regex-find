@@ -6,6 +6,7 @@ export const config: PlasmoCSConfig = {
 
 function isVisible(element: HTMLElement): boolean {
   const style = window.getComputedStyle(element)
+
   return (
     style.display !== "none" &&
     style.visibility !== "hidden" &&
@@ -15,23 +16,29 @@ function isVisible(element: HTMLElement): boolean {
   )
 }
 
-function getNodesWithVisibleText(): Text[] {
-  let nodesWithVisibleText: Text[] = []
+function getElementsWithVisibleText(): HTMLElement[] {
+  let elementsWithVisibleText: HTMLElement[] = []
 
-  function collectVisibleTextNodes(node: Node): void {
+  function collectVisibleTextElements(node: Node): void {
     if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== "") {
-      if (node.parentElement && isVisible(node.parentElement)) {
-        nodesWithVisibleText.push(node as Text)
+      const parentElement = node.parentElement
+      if (
+        parentElement &&
+        isVisible(parentElement) &&
+        !elementsWithVisibleText.includes(parentElement)
+      ) {
+        elementsWithVisibleText.push(parentElement)
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      node.childNodes.forEach((child) => collectVisibleTextNodes(child))
+      node.childNodes.forEach((child) => collectVisibleTextElements(child))
     }
   }
 
-  collectVisibleTextNodes(document.body)
+  collectVisibleTextElements(document.body)
 
-  return nodesWithVisibleText
+  return elementsWithVisibleText
 }
 
-const nodes: Text[] = getNodesWithVisibleText()
-console.log(nodes)
+const elements: HTMLElement[] = getElementsWithVisibleText()
+console.log(elements)
+console.log(elements.map((e) => e.textContent))
