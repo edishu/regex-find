@@ -4,7 +4,7 @@ export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
 
-function isVisible(element: HTMLElement) {
+function isVisible(element: HTMLElement): boolean {
   const style = window.getComputedStyle(element)
   return (
     style.display !== "none" &&
@@ -15,18 +15,16 @@ function isVisible(element: HTMLElement) {
   )
 }
 
-function getNodesWithVisibleText() {
-  let nodesWithVisibleText = []
+function getNodesWithVisibleText(): Text[] {
+  let nodesWithVisibleText: Text[] = []
 
-  function collectVisibleTextNodes(node) {
-    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
-      if (isVisible(node.parentElement)) {
-        nodesWithVisibleText.push(node)
+  function collectVisibleTextNodes(node: Node): void {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== "") {
+      if (node.parentElement && isVisible(node.parentElement)) {
+        nodesWithVisibleText.push(node as Text)
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      for (let child of node.childNodes) {
-        collectVisibleTextNodes(child)
-      }
+      node.childNodes.forEach((child) => collectVisibleTextNodes(child))
     }
   }
 
@@ -35,6 +33,5 @@ function getNodesWithVisibleText() {
   return nodesWithVisibleText
 }
 
-const nodes = getNodesWithVisibleText()
-
-console.log(nodes[1])
+const nodes: Text[] = getNodesWithVisibleText()
+console.log(nodes)
