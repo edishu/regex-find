@@ -1,13 +1,34 @@
-import type { PlasmoCSConfig, PlasmoGetOverlayAnchorList } from "plasmo"
+import type {
+  PlasmoCSConfig,
+  PlasmoGetInlineAnchorList,
+  PlasmoGetOverlayAnchorList,
+  PlasmoGetShadowHostId
+} from "plasmo"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
 
 // @ts-ignore: TODO improve return type of getElementsWithVisibleText
-export const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async () => {
-  // return document.q
-  return getElementsWithVisibleText()
+// export const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async () => {
+//   return document.querySelectorAll("h1")
+//   // return getElementsWithVisibleText()
+// }
+
+export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
+  // console.log("here")
+  return [
+    {
+      element: document.querySelector("h1"),
+      insertPosition: "beforebegin"
+    }
+  ]
+  // return getElementsWithVisibleText()
+}
+
+export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
+  console.log(element)
+  return `adonais`
 }
 
 const PlasmoPricingExtra = () => {
