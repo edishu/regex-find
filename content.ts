@@ -15,24 +15,26 @@ function isVisible(element: HTMLElement) {
   )
 }
 
-function getVisibleTextFromDOM() {
-  let visibleText = []
+function getNodesWithVisibleText() {
+  let nodesWithVisibleText = []
 
-  function extractVisibleText(node) {
+  function collectVisibleTextNodes(node) {
     if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
       if (isVisible(node.parentElement)) {
-        visibleText.push(node.textContent.trim())
+        nodesWithVisibleText.push(node)
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       for (let child of node.childNodes) {
-        extractVisibleText(child)
+        collectVisibleTextNodes(child)
       }
     }
   }
 
-  extractVisibleText(document.body)
+  collectVisibleTextNodes(document.body)
 
-  return visibleText.join(" ")
+  return nodesWithVisibleText
 }
 
-console.log(getVisibleTextFromDOM())
+const nodes = getNodesWithVisibleText()
+
+console.log(nodes[1])
