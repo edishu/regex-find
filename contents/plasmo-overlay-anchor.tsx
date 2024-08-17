@@ -1,8 +1,30 @@
-import type { PlasmoCSConfig } from "plasmo"
+import type { PlasmoCSConfig, PlasmoGetOverlayAnchorList } from "plasmo"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
+
+// @ts-ignore: TODO improve return type of getElementsWithVisibleText
+export const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async () => {
+  // return document.q
+  return getElementsWithVisibleText()
+}
+
+const PlasmoPricingExtra = () => {
+  // return null
+  return (
+    <span
+      style={{
+        borderRadius: 4,
+        background: "transparent",
+        padding: 4
+      }}>
+      CSUI OVERLAY ANCHOR
+    </span>
+  )
+}
+
+export default PlasmoPricingExtra
 
 function isVisible(element: HTMLElement): boolean {
   const style = window.getComputedStyle(element)
@@ -50,8 +72,3 @@ function getElementsWithVisibleText(): HTMLElement[] {
 
   return Array.from(elementsWithVisibleText)
 }
-
-// const elements: HTMLElement[] = getElementsWithVisibleText()
-// console.log(elements)
-
-// console.log(elements.map((e) => e.textContent))
