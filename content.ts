@@ -1,7 +1,7 @@
 import type { PlasmoCSConfig } from "plasmo"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/*"]
+  matches: ["https://quotes.toscrape.com/hi/*"]
 }
 
 function isVisible(element: HTMLElement): boolean {

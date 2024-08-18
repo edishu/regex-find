@@ -4,6 +4,8 @@ import type {
   PlasmoGetInlineAnchorList
 } from "plasmo"
 
+import { usePort } from "@plasmohq/messaging/hook"
+
 export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
@@ -18,6 +20,11 @@ export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
 }
 
 const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
+  const mailPort = usePort("user-text")
+  // console.log(mailPort)
+  mailPort.listen((msg) => {
+    console.log(msg)
+  })
   const anchorElement = props.anchor.element
   const anchorText = anchorElement.textContent
   const split = anchorText.split(/(a)/)
