@@ -1,22 +1,20 @@
 import type {
   PlasmoCSConfig,
   PlasmoCSUIProps,
-  PlasmoGetInlineAnchor,
   PlasmoGetInlineAnchorList
 } from "plasmo"
 import { useEffect, useState } from "react"
 
-export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/*"]
-}
+export const config: PlasmoCSConfig = {}
 
-let ALL_TEXT_ELEMENTS = []
+let ALL_TEXT_ELEMENTS = {}
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
-  if (ALL_TEXT_ELEMENTS.length === 0) {
-    ALL_TEXT_ELEMENTS = getElementsWithVisibleText()
+  const currentURL = window.location.href
+  if (!ALL_TEXT_ELEMENTS[currentURL]) {
+    ALL_TEXT_ELEMENTS[currentURL] = getElementsWithVisibleText()
   }
-  return ALL_TEXT_ELEMENTS
+  return ALL_TEXT_ELEMENTS[currentURL]
 }
 
 const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
