@@ -29,20 +29,38 @@ const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
       }
     })
   }, [])
-  console.log(userText)
+
   const anchorElement = props.anchor.element
   const anchorText = anchorElement.textContent
-  const split = anchorText.split(/(a)/)
-  const imputed = split.map((sp) => {
-    if (sp === "a") {
-      const span = document.createElement("span")
-      span.style.backgroundColor = "yellow"
-      span.textContent = "a"
-      return span
-    }
-    return sp
-  })
-  anchorElement.replaceChildren(...imputed)
+
+  if (userText.length % 2 === 0) {
+    console.log("a-ing")
+    const split = anchorText.split(/(a)/)
+    const imputed = split.map((sp) => {
+      if (sp === "a") {
+        const span = document.createElement("span")
+        span.style.backgroundColor = "yellow"
+        span.textContent = "a"
+        return span
+      }
+      return sp
+    })
+    anchorElement.replaceChildren(...imputed)
+  } else {
+    console.log("e-ing")
+    const split = anchorText.split(/(e)/)
+    const imputed = split.map((sp) => {
+      if (sp === "e") {
+        const span = document.createElement("span")
+        span.style.backgroundColor = "yellow"
+        span.textContent = "e"
+        return span
+      }
+      return sp
+    })
+    anchorElement.replaceChildren(...imputed)
+  }
+
   return null
 }
 
