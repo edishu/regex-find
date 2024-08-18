@@ -3,8 +3,7 @@ import type {
   PlasmoCSUIProps,
   PlasmoGetInlineAnchorList
 } from "plasmo"
-
-import { usePort } from "@plasmohq/messaging/hook"
+import { useEffect, useState } from "react"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
@@ -20,11 +19,17 @@ export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
 }
 
 const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
-  const mailPort = usePort("user-text")
-  // console.log(mailPort)
-  mailPort.listen((msg) => {
-    console.log(msg)
-  })
+  const [userText, setUserText] = useState("")
+  useEffect(() => {
+    chrome.runtime.onConnect.addListener((port) => {
+      if (port.name === "knockknock") {
+        port.onMessage.addListener((msg) => {
+          setUserText(msg.text)
+        })
+      }
+    })
+  }, [])
+  console.log(userText)
   const anchorElement = props.anchor.element
   const anchorText = anchorElement.textContent
   const split = anchorText.split(/(a)/)
