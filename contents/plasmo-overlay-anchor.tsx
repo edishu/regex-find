@@ -1,9 +1,7 @@
 import type {
   PlasmoCSConfig,
   PlasmoCSUIProps,
-  PlasmoGetInlineAnchorList,
-  PlasmoGetOverlayAnchorList,
-  PlasmoGetShadowHostId
+  PlasmoGetInlineAnchorList
 } from "plasmo"
 
 export const config: PlasmoCSConfig = {
@@ -32,7 +30,6 @@ const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
     }
     return sp
   })
-  console.log(imputed)
   anchorElement.replaceChildren(...imputed)
   return null
 }
