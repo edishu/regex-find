@@ -7,7 +7,7 @@ import type {
 } from "plasmo"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/h1/*"]
+  matches: ["https://quotes.toscrape.com/*"]
 }
 
 // @ts-ignore: TODO improve return type of getElementsWithVisibleText
@@ -17,34 +17,20 @@ export const config: PlasmoCSConfig = {
 // }
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
-  // console.log("here")
-  return [
-    {
-      element: document.querySelector("h1"),
-      insertPosition: "beforebegin"
-    }
-  ]
-  // return getElementsWithVisibleText()
+  return document.querySelectorAll("a")
 }
 
-export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
-  console.log(element)
-  return `adonais`
-}
+// export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
+//   return `adonais`
+// }
 
 const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
-  console.log(props)
-  // return null
-  return (
-    <span
-      style={{
-        borderRadius: 4,
-        background: "transparent",
-        padding: 4
-      }}>
-      CSUI OVERLAY ANCHOR
-    </span>
-  )
+  const anchorElement = props.anchor.element
+
+  const span = document.createElement("span")
+  span.textContent = "hello"
+  anchorElement.replaceChildren(...["a ", span])
+  return null
 }
 
 export default PlasmoPricingExtra
