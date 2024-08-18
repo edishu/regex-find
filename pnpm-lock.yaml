@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       plasmo:
         specifier: 0.88.0
         version: 0.88.0(@swc/core@1.7.11(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -20,9 +17,6 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
-      react-from-dom:
-        specifier: ^0.7.3
-        version: 0.7.3(react@18.2.0)
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.1.1
@@ -30,9 +24,6 @@ importers:
       '@types/chrome':
         specifier: 0.0.258
         version: 0.0.258
-      '@types/lodash':
-        specifier: ^4.17.7
-        version: 4.17.7
       '@types/node':
         specifier: 20.11.5
         version: 20.11.5
@@ -1279,9 +1270,6 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
-
-  '@types/lodash@4.17.7':
-    resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
 
   '@types/node@20.11.5':
     resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
@@ -2582,11 +2570,6 @@ packages:
 
   react-error-overlay@6.0.9:
     resolution: {integrity: sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==}
-
-  react-from-dom@0.7.3:
-    resolution: {integrity: sha512-9IK6R7+eD1wOAMC2ZCrENev0eK1625cb7vX+cnnOR9LBRNbjKiaJk4ij2zQbcefEXTWjXFhA7CTO1cd8wMONnw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
@@ -4544,8 +4527,6 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/lodash@4.17.7': {}
-
   '@types/node@20.11.5':
     dependencies:
       undici-types: 5.26.5
@@ -5910,10 +5891,6 @@ snapshots:
       scheduler: 0.23.2
 
   react-error-overlay@6.0.9: {}
-
-  react-from-dom@0.7.3(react@18.2.0):
-    dependencies:
-      react: 18.2.0
 
   react-refresh@0.14.0: {}
 
