@@ -1,6 +1,7 @@
 import type {
   PlasmoCSConfig,
   PlasmoCSUIProps,
+  PlasmoGetInlineAnchor,
   PlasmoGetInlineAnchorList
 } from "plasmo"
 import { useEffect, useState } from "react"
@@ -32,33 +33,22 @@ const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
 
   const anchorElement = props.anchor.element
   const anchorText = anchorElement.textContent
-
-  if (userText.length % 2 === 0) {
-    console.log("a-ing")
-    const split = anchorText.split(/(a)/)
-    const imputed = split.map((sp) => {
-      if (sp === "a") {
+  if (userText) {
+    const re = new RegExp(`(${userText})`)
+    const split = anchorText.split(re)
+    const imputed = split.map((splitText) => {
+      console.log(splitText)
+      if (re.test(splitText)) {
         const span = document.createElement("span")
         span.style.backgroundColor = "yellow"
-        span.textContent = "a"
+        span.textContent = splitText
         return span
       }
-      return sp
+      return splitText
     })
     anchorElement.replaceChildren(...imputed)
   } else {
-    console.log("e-ing")
-    const split = anchorText.split(/(e)/)
-    const imputed = split.map((sp) => {
-      if (sp === "e") {
-        const span = document.createElement("span")
-        span.style.backgroundColor = "yellow"
-        span.textContent = "e"
-        return span
-      }
-      return sp
-    })
-    anchorElement.replaceChildren(...imputed)
+    anchorElement.replaceChildren(anchorText)
   }
 
   return null
