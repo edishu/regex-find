@@ -6,7 +6,7 @@ import type {
 } from "plasmo"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/hi/*"]
+  matches: ["https://quotes.toscrape.com/do-not-exisit/*"]
 }
 export const getRootContainer: PlasmoGetRootContainer = () => {
   return new Promise((resolve) => {
