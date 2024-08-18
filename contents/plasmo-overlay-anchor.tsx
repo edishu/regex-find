@@ -10,26 +10,30 @@ export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
 
-// @ts-ignore: TODO improve return type of getElementsWithVisibleText
-// export const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async () => {
-//   return document.querySelectorAll("h1")
-//   // return getElementsWithVisibleText()
-// }
+let ALL_TEXT_ELEMENTS = []
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
-  return document.querySelectorAll("a")
+  if (ALL_TEXT_ELEMENTS.length === 0) {
+    ALL_TEXT_ELEMENTS = getElementsWithVisibleText()
+  }
+  return ALL_TEXT_ELEMENTS
 }
-
-// export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
-//   return `adonais`
-// }
 
 const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
   const anchorElement = props.anchor.element
-
-  const span = document.createElement("span")
-  span.textContent = "hello"
-  anchorElement.replaceChildren(...["a ", span])
+  const anchorText = anchorElement.textContent
+  const split = anchorText.split(/(a)/)
+  const imputed = split.map((sp) => {
+    if (sp === "a") {
+      const span = document.createElement("span")
+      span.style.backgroundColor = "yellow"
+      span.textContent = "a"
+      return span
+    }
+    return sp
+  })
+  console.log(imputed)
+  anchorElement.replaceChildren(...imputed)
   return null
 }
 
