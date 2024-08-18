@@ -23,7 +23,7 @@ const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
   const [userText, setUserText] = useState("")
   useEffect(() => {
     chrome.runtime.onConnect.addListener((port) => {
-      if (port.name === "knockknock") {
+      if (port.name === "user-text") {
         port.onMessage.addListener((msg) => {
           setUserText(msg.text)
         })
@@ -37,7 +37,6 @@ const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
     const re = new RegExp(`(${userText})`)
     const split = anchorText.split(re)
     const imputed = split.map((splitText) => {
-      console.log(splitText)
       if (re.test(splitText)) {
         const span = document.createElement("span")
         span.style.backgroundColor = "yellow"
