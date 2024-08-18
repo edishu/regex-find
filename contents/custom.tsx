@@ -5,15 +5,15 @@ import type {
   PlasmoRender
 } from "plasmo"
 import { createRoot } from "react-dom/client"
+import convert from "react-from-dom"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://quotes.toscrape.com/*"]
 }
 export const getRootContainer: PlasmoGetRootContainer = () => {
-  console.log("ddd")
   return new Promise((resolve) => {
     const checkInterval = setInterval(() => {
-      const rootContainer = document.querySelector("h1")
+      const rootContainer = document.querySelector("a")
       if (rootContainer) {
         clearInterval(checkInterval)
         resolve(rootContainer)
@@ -21,29 +21,19 @@ export const getRootContainer: PlasmoGetRootContainer = () => {
     }, 137)
   })
 }
-const PlasmoOverlay = () => {
-  return (
-    <span
-      style={{
-        borderRadius: 4,
-        background: "yellow",
-        padding: 4,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        transform: "translateY(-24px) translateX(42px)"
-      }}>
-      CSUI ROOT CONTAINER
-    </span>
-  )
-}
 
 export const render: PlasmoRender<PlasmoCSUIJSXContainer> = async ({
   createRootContainer
 }) => {
   const rootContainer = await createRootContainer()
-  const root = createRoot(rootContainer)
-  root.render(<PlasmoOverlay />)
+  console.log(rootContainer)
+  const x = document.createElement("div")
+  x.textContent = "hhh"
+  console.log(rootContainer.classList)
+  rootContainer.style.color = "red"
+  // const root = createRoot(rootContainer)
+  // root.render(<h1>ss</h1>)
+  // root.render(anchor.element)
 }
 
-export default PlasmoOverlay
+// export default PlasmoOverlay

@@ -1,12 +1,13 @@
 import type {
   PlasmoCSConfig,
+  PlasmoCSUIProps,
   PlasmoGetInlineAnchorList,
   PlasmoGetOverlayAnchorList,
   PlasmoGetShadowHostId
 } from "plasmo"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://quotes.toscrape.com/hi/*"]
+  matches: ["https://quotes.toscrape.com/h1/*"]
 }
 
 // @ts-ignore: TODO improve return type of getElementsWithVisibleText
@@ -16,7 +17,7 @@ export const config: PlasmoCSConfig = {
 // }
 
 export const getInlineAnchorList: PlasmoGetInlineAnchorList = async () => {
-  console.log("here")
+  // console.log("here")
   return [
     {
       element: document.querySelector("h1"),
@@ -31,8 +32,9 @@ export const getShadowHostId: PlasmoGetShadowHostId = ({ element }) => {
   return `adonais`
 }
 
-const PlasmoPricingExtra = () => {
-  return null
+const PlasmoPricingExtra = (props: PlasmoCSUIProps) => {
+  console.log(props)
+  // return null
   return (
     <span
       style={{
